@@ -2,9 +2,20 @@ body {
   background-color: hsl(255,100%,50%);
 }
 
+#calculator {
+  border: solid;
+  background-color: hs(255, 100%, 60%);
+  width: 500px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 10px;
+}
+
 input {
-  width: 446px;
-  height: 35px;
+  width: 85%;
+  height: 7%;
   text-align: right;
   padding: 10px;
   border: inset;
@@ -24,10 +35,11 @@ button:hover {
 button:active {
   border: inset;
   border-width: thick;
-  border-colr: hsl(255,100%, 100%);
+  border-color: hsl(255,100%, 100%);
   background-color: hsl(255, 50%, 50%);
 }
 
-#txtResult {
+
+[readonly='readonly'] {
   background-color: hsl(255, 50%, 80%);
 }
