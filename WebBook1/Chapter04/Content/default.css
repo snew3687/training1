@@ -2,15 +2,41 @@ body {
   background-color: hsl(255,100%,50%);
 }
 
-#calculator {
-  border: solid;
-  background-color: hs(255, 100%, 60%);
+#calculatorContainer {
   width: 500px;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.headerFooter {
+  background-color: hsl(75, 100%, 60%);
+}
+
+#header {
+  border-top: solid;
+  border-left: solid;
+  border-right: solid;
+  border-bottom: none;
+  text-align: center;
+  font-family: monospace;
+  font-size: 60px;
+  text-transform: uppercase;
+}
+
+#calculator {
+  border: solid;
+  background-color: hsl(255, 100%, 60%);
   text-align: center;
   padding: 10px;
+}
+
+#footer {
+  border-top: none;
+  border-left: solid;
+  border-right: solid;
+  border-bottom: solid;
+
 }
 
 input {
