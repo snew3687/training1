@@ -3,8 +3,10 @@ body {
 }
 
 #calculatorContainer {
+/**
   width: 500px;
   height: 500px;
+***/
   margin-left: auto;
   margin-right: auto;
 }
@@ -14,14 +16,14 @@ body {
 }
 
 #header {
-  border-top: solid;
-  border-left: solid;
-  border-right: solid;
-  border-bottom: none;
+  border: solid;
   text-align: center;
   font-family: monospace;
-  font-size: 60px;
+  font-size: 30px;
   text-transform: uppercase;
+  float: left;
+  width: 20%;
+  height: 100%;
 }
 
 #calculator {
@@ -29,14 +31,16 @@ body {
   background-color: hsl(255, 100%, 60%);
   text-align: center;
   padding: 10px;
+  float: left;
+  width: 50%;
+  height: 100%;
 }
 
 #footer {
-  border-top: none;
-  border-left: solid;
-  border-right: solid;
-  border-bottom: solid;
-
+  border: solid;
+  float: left;
+  width: 26%;
+  height: 100%;
 }
 
 input {
