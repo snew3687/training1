@@ -1,5 +1,5 @@
 body {
-  background-color: hsl(255,100%,50%);
+  background-color: rgba(76, 158, 217, 1);
 }
 
 #calculatorContainer {
@@ -26,7 +26,7 @@ body {
 
 #calculator {
   border: solid;
-  background-color: hsl(255, 100%, 60%);
+  background-color: rgba(0, 114, 171, 1);
   text-align: center;
   padding: 10px;
 }
@@ -39,7 +39,7 @@ body {
 
 }
 
-input {
+input.calcInput {
   width: 85%;
   height: 7%;
   text-align: right;
@@ -67,5 +67,21 @@ button:active {
 
 
 [readonly='readonly'] {
-  background-color: hsl(255, 50%, 80%);
+  background-color: rgba(94, 136, 176, 1);
 }
+
+#otherInput {
+  text-align: center;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#otherInput input {
+  width: 85%;
+  text-align: left;
+  padding: 10px;
+  background-color: rgba(94, 136, 176, 1);
+  margin: 10px;
+}
+
