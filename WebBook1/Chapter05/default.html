@@ -6,7 +6,18 @@
     <script type="text/javascript" src="Scripts/CalculatorLibrary.js"></script>
 </head>
 <body>
-    <div id="calculator">
+  <div id="container">
+    <header>
+      <hgroup id="headerText">
+        <h1>Contoso Ltd.</h1>
+        <h2>Your success equals our success</h2>
+      </hgroup>
+    </header>
+    <nav>
+      <a href="default.html">Home</a>
+    </nav>
+    <div role="main">
+      <div id="calculator">
         <input id="txtResult" type="text" readonly="readonly" /><br />
         <input id="txtInput" type="text" /><br />
         <button id="btn7">7</button>
@@ -23,7 +34,17 @@
         <button id="btnClearEntry">CE</button><br />
         <button id="btnPlus">+</button>
         <button id="btnMinus">-</button>
-    </div>
+      </div><!-- id="calculator" -->
+    </div> <!-- id="main" -->
+    <aside>
+      <p>Advertisements</p>
+    </aside>
+    <footer>
+      <p>
+        Copyright &copy; 2012, Contose Ltd., All Rights Reserved
+      </p>
+    </footer>
+  </div> <!-- id="container" -->
     <script type="text/javascript">
         window.addEventListener('load', initialize, false);
     </script>
