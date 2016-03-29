@@ -1,0 +1,6 @@
+{
+	// Add options here
+	
+	// Would uncomment this if wanted it to relax rule about semi-colons
+	//"asi" : true
+}
