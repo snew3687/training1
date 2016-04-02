@@ -1,0 +1,19 @@
+{
+  "name": "contosoweb",
+  "version": "0.0.0",
+  "description": "Contoso Web Site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Contoso",
+    "WebCalculator"
+  ],
+  "author": "Stevoe",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "formidable": "1.0.17",
+    "express": "4.13.4"
+  }
+}
