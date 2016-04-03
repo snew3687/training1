@@ -6,7 +6,7 @@ function displayCoverAsync() {
 }
 
 function showMessageContentAsync(message) {
-  $('#messageContent').html(message);
+  $('#message').html(message);
   $('#messageBox').show();
   return $('#messageContent').slideDown(milliseconds).promise();
 }
