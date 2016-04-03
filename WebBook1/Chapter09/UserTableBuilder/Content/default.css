@@ -1,0 +1,20 @@
+thead {
+  background-color: hsl(160, 96%, 88%);
+}
+/**
+tbody {
+  background-color: #FFFF99;
+}
+****/
+
+td {
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: hsl(56, 96%, 70%);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: hsl(295, 96%, 80%);
+}
