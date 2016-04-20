@@ -2,6 +2,12 @@ $(document).ready(function() {
   
   contactsNamespace.clearForm();
   contactsNamespace.initialise();
+
+  $(window).on('storage', contactsNamespace.handleStorageEvent);
+
+  if ('onstorage' in document) { // Bind to document for IE8
+    $(document).on('storage', contactsNamespace.handleStorageEvent);
+  }
 });
 
 (function() {
@@ -10,19 +16,21 @@ $(document).ready(function() {
   var ns= this.contactsNamespace;
   var currentRecord;
 
+  ns.handleStorageEvent = function(e) {
+    alert('New value stored - ' + e.originalEvent.newValue);
+  };
+
   ns.initialise = function() {
     $('#btnSave').on('click', ns.save);
     ns.display();
   };
   
   ns.clearForm = function() {
-    // Probably won't need next line now that have removed other bugs
-    // localStorage.setItem('contacts', [] ); // Clear this slot in localStorage of Web Storage
     $(':input').val(''); //Clear all input fields
-  }
+  };
 
   function retrieveFromStorage() {
-    var contactsJSON = localStorage.getItem('contacts');
+    var contactsJSON = sessionStorage.getItem('contacts');
     return contactsJSON ? JSON.parse(contactsJSON) : [];
   }
 
@@ -80,7 +88,7 @@ $(document).ready(function() {
       results.push(contact);
     }
 
-    localStorage.setItem('contacts', JSON.stringify(results));
+    sessionStorage.setItem('contacts', JSON.stringify(results));
     ns.display();
   };
 
