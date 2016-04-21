@@ -1,0 +1,6 @@
+# No gvim viles
+*~
+*.swp
+*.swo
+Thumbs.db
+node_modules
