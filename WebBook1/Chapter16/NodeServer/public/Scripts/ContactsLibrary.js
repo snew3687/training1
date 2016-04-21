@@ -75,11 +75,14 @@ window.IDBCursor =
             html += '<tr><td>' + contact.email + '</td>';
             html += '<td>' + contact.firstName + ' ' + contact.lastName + '</td>';
             html += '<td><a class="edit" href="javascript:void(0)" data-key='
-                        + key + '>Edit</a></td></tr>';
+                        + key + '>Edit</a></td>';
+            html += '<td><a class="delete" href="javascript:void(0)" data-key='
+                        + key + '>Delete</a></td></tr></tr>';
         }
-        html = html || '<tr><td colspan="3">No records available</td></tr>';
+        html = html || '<tr><td colspan="4">No records available</td></tr>';
         $('#contacts tbody').html(html);
         $('#contacts a.edit').on('click', ns.loadContact);
+        $('#contacts a.delete').on('click', ns.deleteContact);
     }
 
     ns.loadContact = function () {
@@ -120,6 +123,18 @@ window.IDBCursor =
         request.onsuccess = function(response) {
           ns.display();
         };
+    };
+
+    ns.deleteContact = function () {
+      var key = parseInt($(this).attr('data-key'));
+
+      var trans = db.transaction('contacts', 'readwrite');
+      var contacts = trans.objectStore("contacts");
+      var request = contacts.delete(key);
+
+      request.onsuccess = function(event) {
+        ns.display();
+      };
     };
 
 })();
