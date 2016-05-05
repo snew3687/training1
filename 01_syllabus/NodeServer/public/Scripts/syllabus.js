@@ -11,15 +11,16 @@
   };
 
   function handleSectionHeaderClicked() {
-    var section = $(this);
-    var header = $('h4', section);
-    header.toggleClass('collapsed');
-    header.toggleClass('expanded');
+    var section$ = $(this);
+    var header$ = $('h4', section$);
+    var elaboration$= $('div.elaboration', section$);
 
-
-    var elaboration= $('div.elaboration', section)
-    elaboration.toggleClass('collapsed');
-    elaboration.toggleClass('expanded');
+    elaboration$.toggle('slow', function() {
+      header$.toggleClass('collapsed');
+      header$.toggleClass('expanded');
+      elaboration$.toggleClass('collapsed');
+      elaboration$.toggleClass('expanded');
+    });
   }
 
 
