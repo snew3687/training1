@@ -3,13 +3,23 @@
   var ns = this.syllabusNamespace;
 
   ns.initialiseHandlers = function() {
-    $('h4').on('click', handleSectionHeaderClicked);
+    $(  'section.content,'
+      + 'section.outcomes,'
+      + 'section.backgroundInformation,'
+      + 'section.language')
+    .on('click', handleSectionHeaderClicked);
   };
 
   function handleSectionHeaderClicked() {
-    var siblings = $(this).siblings();
-    var section = siblings.first();
-    section.toggleClass('collapsed');
+    var section = $(this);
+    var header = $('h4', section);
+    header.toggleClass('collapsed');
+    header.toggleClass('expanded');
+
+
+    var elaboration= $('div.elaboration', section)
+    elaboration.toggleClass('collapsed');
+    elaboration.toggleClass('expanded');
   }
 
 

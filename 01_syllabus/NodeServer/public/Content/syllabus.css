@@ -1,4 +1,24 @@
-.collapsed {
+div.collapsed {
   display: none;
 } 
+
+h4 {
+  text-transform: uppercase; 
+  width: 100%;
+  border-style: solid;
+  border-width: 1px;
+}
+
+h4.expanded {
+  background-color: greenyellow;
+}
+
+h4.collapsed {
+  background-color: lightgray;
+}
+
+.elaboration {
+  border-style: solid;
+  border-width: 1px;
+}
 	
