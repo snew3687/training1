@@ -1,0 +1,14 @@
+1. Add header 1 to book title
+2. Add header 2 to all Chapter starts
+  %s/\CChapter /## Chapter /g
+3. Delete first 8 lines of Gutenberg preamble, to book title
+4. Break out meta information into JSON file
+5. Delete these lines:
+  *** START OF THIS PROJECT GUTENBERG EBOOK PRIDE AND PREJUDICE ***
+  Produced by Anonymous Volunteers
+6. Deleted from this line, onwards, including licensing info:
+  End of the Project Gutenberg EBook of Pride and Prejudice, by Jane Austen
+7. Delete up to start of first chapter
+8. Good. Already has _italic_ markers in book text
+9. Add in pauses, like:
+  %s/--/.../gc
