@@ -1,6 +1,4 @@
 ﻿
-# Pride and Prejudice
-
 ## Chapter 1
 
 

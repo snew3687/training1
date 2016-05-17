@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-  <title></title>
+    <title>Book Reader</title>
+    <script src="scripts/jquery-1.12.3.js"></script>
+    <script src="scripts/bookReader.js"></script>
   </head>
   <body>
-Hello world
+    <div id="chapterControlContainer">
+      <input type="number" id="chapterToFetch" value='1' />
+      <input type="button" id="fetchChapter" value="Get Chapter" />
+    </div> <!-- id="chapterControlContainer" -->
+
+    <div id="readingAreaContainer">
+      <p>
+        Book chapters will go here
+      </p>
+
+    </div> <!-- id="readingAreaContainer" -->
   </body>
+  <script>
+    $(document).ready(function() {
+      bookReader.initialise();
+    });
+  </script>
 </html>
