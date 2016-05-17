@@ -1,20 +1,18 @@
 var express = require('express');
 var app=express();
+var bookServer = require('./bookServer.js');
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/books/JaneAusten_PrideAndPrejudice/chapter/1', function(request, response) {
-  response.type('html');
-  response
-    .status(200)
-    .send('<p>This is the Chapter 1 content</p>'); 
-});
+app.get('/books/:bookUri/chapter/:chapterNumber', function(request, response) {
+  var chapterNumber = request.params.chapterNumber;
+  var bookUri = request.params.bookUri;
+  var chapterContent = bookServer.getBookChapter(bookUri, chapterNumber);
 
-app.get('/books/JaneAusten_PrideAndPrejudice/chapter/2', function(request, response) {
   response.type('html');
   response
     .status(200)
-    .send('<p>This is the Chapter 2 content</p>'); 
+    .send(chapterContent);
 });
 
 var port = 8080;
