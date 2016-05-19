@@ -1,6 +1,11 @@
 var express = require('express');
 var app=express();
 var bookServer = require('./bookServer.js');
+bookServer.initialiseServer(
+  {
+    booksDocRoot: 'xxxx'
+  }
+);
 
 app.use(express.static(__dirname + '/public'));
 
