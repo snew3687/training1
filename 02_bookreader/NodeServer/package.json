@@ -10,6 +10,8 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "express": "3.0.0"
+    "express": "3.0.0",
+    "fs": "0.0.2",
+    "commonmark": "0.25.1"
   }
 }
