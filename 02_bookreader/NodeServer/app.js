@@ -3,7 +3,8 @@ var app=express();
 var bookServer = require('./bookServer.js');
 bookServer.initialiseServer(
   {
-    booksDocRoot: 'xxxx'
+    //var filepath = 'D:\\AACode\\Training\\training1\\02_bookreader\\NodeServer\\public\\content\\books\\JaneAusten_PrideAndPrejudice\\bookChapters.Chapter1.md';
+    booksDocRoot: '.\\public\\content\\books'
   }
 );
 
