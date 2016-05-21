@@ -13,17 +13,37 @@ function initialiseServer(options) {
   }
 }  
 
+function Book(descriptor, chapterSet)
+{
+  this.descriptor = descriptor;
+  this.chapterSet = chapterSet;
+}
+
 function loadBook(bookUri) {
   if (bookLibrary[bookUri]) return bookLibrary[bookUri];
 
+  var chapterSet = loadBookChapterSet(bookUri);
+  var bookDescriptor = loadBookDescriptor(bookUri); 
+
+  bookLibrary[bookUri] = new Book(bookDescriptor, chapterSet); 
+
+  return true; 
+}
+
+function loadBookDescriptor(bookUri) {
+  var filepath = booksDocRoot + '\\' + bookUri + '\\bookDescriptor.json';
+  var descriptor = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+  console.log('Read book descriptor ' + JSON.stringify(descriptor));
+  return descriptor;
+}
+
+function loadBookChapterSet(bookUri) {
   var filepath = booksDocRoot + '\\' + bookUri + '\\bookChapters.md';
   console.log('About to read file - ' + filepath);
   var data = fs.readFileSync(filepath, 'utf8');
   console.log('About to parse file data - ' + data.substring(0,100));
 
-  bookLibrary[bookUri] = parseAndLoadBook(data);
-
-  return true; 
+  return parseAndLoadBook(data);
 }
 
 function parseAndLoadBook(fileContent) {
@@ -64,6 +84,24 @@ function parseAndLoadBook(fileContent) {
   return chapterSet;
 }
 
+function getBookDescriptor(bookUri) {
+  var book;
+  var result = 
+  {
+    "Title": "Unknown book",
+    "Author": "Unknown Author",
+    "Posting Date": null,
+    "Release Date": null,
+    "Last updated": null,
+    "Language": "Unknown language"
+  };
+
+  if (loadBook(bookUri)) {
+    result = bookLibrary[bookUri].descriptor;
+  }
+  return result;
+}
+
 function getBookChapter(bookUri, chapterNumber) {
   var result = '<p>Chapter - ' + chapterNumber + ' - not found</p>';
 
@@ -72,11 +110,11 @@ function getBookChapter(bookUri, chapterNumber) {
   }
 
   var chapterIndex = chapterNumber - 1;
-  var bookChapterSet = bookLibrary[bookUri];
+  var book = bookLibrary[bookUri];
   var chapterEntry;
 
-  if (bookChapterSet[chapterIndex]) {
-    chapterEntry = bookChapterSet[chapterIndex];
+  if (book.chapterSet[chapterIndex]) {
+    chapterEntry = book.chapterSet[chapterIndex];
 
     // Render chapter heading
     result = writer.render(chapterEntry.chapterHeading);
@@ -95,6 +133,7 @@ function getBookChapter(bookUri, chapterNumber) {
   return result;
 }
 
+exports.getBookDescriptor = getBookDescriptor;
 exports.getBookChapter = getBookChapter;
 exports.initialiseServer = initialiseServer;
 

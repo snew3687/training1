@@ -10,6 +10,18 @@ bookServer.initialiseServer(
 
 app.use(express.static(__dirname + '/public'));
 
+// Get book descriptor
+app.get('/books/:bookUri', function(request, response) {
+  var bookUri = request.params.bookUri;
+  var bookDescriptor = bookServer.getBookDescriptor(bookUri);
+
+  response.type('json');
+  response
+    .status(200)
+    .send(bookDescriptor);
+});
+
+// Get book chapter content as HTML
 app.get('/books/:bookUri/chapter/:chapterNumber', function(request, response) {
   var chapterNumber = request.params.chapterNumber;
   var bookUri = request.params.bookUri;
