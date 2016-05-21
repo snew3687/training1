@@ -15,6 +15,10 @@ var bookReader = function() {
   var initialise = function initialise() {
     $("#fetchChapter").on('click', handleFetchChapter);
     loadBookInformation();
+  
+    // Load first chapter
+    $('#chapterToFetch').val(1);
+    handleFetchChapter();
   };
 
   function loadBookInformation() {
