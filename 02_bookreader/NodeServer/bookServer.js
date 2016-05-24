@@ -32,8 +32,10 @@ function loadBook(bookUri) {
 
 function loadBookDescriptor(bookUri) {
   var filepath = booksDocRoot + '\\' + bookUri + '\\bookDescriptor.json';
-  var descriptor = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-  console.log('Read book descriptor ' + JSON.stringify(descriptor));
+  console.log('Start - Read book descriptor from - ' + filepath);
+  var data = fs.readFileSync(filepath, 'utf8');
+  var descriptor = JSON.parse(data);
+  console.log('End - Read book descriptor ' + JSON.stringify(descriptor));
   return descriptor;
 }
 
@@ -71,12 +73,8 @@ function parseAndLoadBook(fileContent) {
     //console.log('Reading chapter: ' + currentNode.literal);
     // Keep accumulating text nodes, up to next heading
     while ((currentNode = currentNode.next) !== null && currentNode.type !== 'heading') {
-      if (currentNode.type === 'paragraph') {
-        //console.log('Adding node type - ' + currentNode.type);
-        chapterEntry.chapterTextNodes.push(currentNode); 
-      } else {
-        //console.log('Skipping node type - ' + currentNode.type); 
-      }
+      //console.log('Adding node type - ' + currentNode.type);
+      chapterEntry.chapterTextNodes.push(currentNode); 
     }
     chapterSet.push(chapterEntry);
   }

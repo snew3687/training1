@@ -1,4 +1,4 @@
-1. Add header 1 to book title
+1. Deleted up to start of first chapter
 2. Add header 2 to all Chapter starts
   %s/\CChapter /## Chapter /g
 3. Delete first 8 lines of Gutenberg preamble, to book title
@@ -12,3 +12,5 @@
 8. Good. Already has _italic_ markers in book text
 9. Add in pauses, like:
   %s/--/.../gc
+10. For any pre-formatted text, add block code markup - ```
+11. Seem to need to convert to (save as) UTF. Use Editplus to save as UTF8 (not UTF8+BOM)

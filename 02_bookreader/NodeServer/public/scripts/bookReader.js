@@ -4,13 +4,13 @@ var bookReader = function() {
   // {
   //   "Title": "Pride and Prejudice",
   //   "Author": "Jane Austen",
-  //   "Posting Date": "August 26, 2008 [EBook #1342]",
-  //   "Release Date": "June, 1998",
-  //   "Last updated": "February 15, 2015",
+  //   "PostingDate": "August 26, 2008 [EBook #1342]",
+  //   "ReleaseDate": "June, 1998",
+  //   "LastUpdated": "February 15, 2015",
   //   "Language": "English"
   // }
   var currentBookDescriptor = { };
-  var currentBookUri = 'JaneAusten_PrideAndPrejudice'; 
+  var currentBookUri = 'LewisCarroll_AlicesAdventuresInWonderland'; 
 
   var initialise = function initialise() {
     $("#fetchChapter").on('click', handleFetchChapter);
