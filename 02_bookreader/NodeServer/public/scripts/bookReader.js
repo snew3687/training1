@@ -13,13 +13,21 @@ var bookReader = function() {
   var currentBookUri = 'LewisCarroll_AlicesAdventuresInWonderland'; 
 
   var initialise = function initialise() {
+    $("a.bookLink").on('click', handleBookLinkClick);
     $("#fetchChapter").on('click', handleFetchChapter);
-    loadBookInformation();
   
+  };
+
+  function handleBookLinkClick(evt) {
+    evt.preventDefault();
+    currentBookUri = $(this).attr('data-bookUri');
+
+    loadBookInformation();
+
     // Load first chapter
     $('#chapterToFetch').val(1);
     handleFetchChapter();
-  };
+  }
 
   function loadBookInformation() {
 
