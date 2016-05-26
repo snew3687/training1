@@ -14,13 +14,11 @@ var bookReader = function() {
 
   var initialise = function initialise() {
     $("a.bookLink").on('click', handleBookLinkClick);
-    $("#fetchChapter").on('click', handleFetchChapter);
-
     initialiseChapterControlHandlers();
-    //handleChapterControl   
   };
 
   function initialiseChapterControlHandlers() {
+    // First/Previous/Next/Last controls
     $('#chapterControlFirst')
       .on('click', { fetchType: 'first' }, handleChapterControl );
     $('#chapterControlPrevious')
@@ -29,6 +27,30 @@ var bookReader = function() {
       .on('click', { fetchType: 'next' }, handleChapterControl );
     $('#chapterControlLast')
       .on('click', { fetchType: 'last' }, handleChapterControl );
+  }
+
+  function initialiseChapterNumberControl() {
+    var allChapterNumbers = [];
+
+    $('#chapterControlNumber').unbind('change');
+    $('#chapterControlNumber').children().remove();
+
+    for (var i = 1; i <= currentBookDescriptor.chapterCount; ++i) allChapterNumbers.push(i);
+
+    $.each(allChapterNumbers, function (i, item) {
+        $('#chapterControlNumber').append($('<option>', { 
+            value: item,
+            text : 'Chapter ' + item 
+        }));
+    });
+
+    $('#chapterControlNumber').bind('change', handleChapterNumberControlChange);
+  }
+
+  function handleChapterNumberControlChange() {
+    var chapterNumber = $('#chapterControlNumber').val();
+    $("#chapterToFetch").val(chapterNumber);
+    handleFetchChapter();
   }
 
   function handleBookLinkClick(evt) {
@@ -55,9 +77,12 @@ var bookReader = function() {
     currentBookDescriptor = bookDescriptor;
     $('div#bookHeader h1').text(currentBookDescriptor.Title);
     $('#bookAuthor').text(currentBookDescriptor.Author);
+    initialiseChapterNumberControl();
   }
 
   function handleChapterControl(evt) {
+    evt.preventDefault();
+
     var fetchType = evt.data.fetchType;
     var chapterNumber = Number($("#chapterToFetch").val());
     if (fetchType === 'first') {
@@ -81,6 +106,7 @@ var bookReader = function() {
 
   function handleFetchChapter() {
     var nextChapter = $("#chapterToFetch").val();
+
     var fetchUrl = "books/" + currentBookUri + "/chapter/" + nextChapter;    
     $.ajax({
       url: fetchUrl,
@@ -91,6 +117,10 @@ var bookReader = function() {
 
   function displayChapter(chapterContent) {
     $('#readingAreaContainer').html(chapterContent);
+
+    // Align chapter number selector with new chapter
+    var chapterNumber = $('#chapterToFetch').val();
+    $("#chapterControlNumber").val(chapterNumber);
   }
 
   return {
