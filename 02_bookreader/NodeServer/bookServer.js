@@ -24,6 +24,7 @@ function loadBook(bookUri) {
 
   var chapterSet = loadBookChapterSet(bookUri);
   var bookDescriptor = loadBookDescriptor(bookUri); 
+  bookDescriptor.chapterCount = chapterSet.length;
 
   bookLibrary[bookUri] = new Book(bookDescriptor, chapterSet); 
 
@@ -91,11 +92,14 @@ function getBookDescriptor(bookUri) {
     "Posting Date": null,
     "Release Date": null,
     "Last updated": null,
-    "Language": "Unknown language"
+    "Language": "Unknown language",
+    // Following properties added after initial load from file
+    chapterCount: 0 
   };
 
   if (loadBook(bookUri)) {
     result = bookLibrary[bookUri].descriptor;
+    result.chapterCounter = 0;
   }
   return result;
 }
