@@ -59,7 +59,7 @@ var bookReader = function() {
 
   function handleChapterControl(evt) {
     var fetchType = evt.data.fetchType;
-    var chapterNumber = $("#chapterToFetch").val();
+    var chapterNumber = Number($("#chapterToFetch").val());
     if (fetchType === 'first') {
       chapterNumber = 1;
     } else if (fetchType === 'previous') { 
