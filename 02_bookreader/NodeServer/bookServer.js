@@ -15,25 +15,27 @@ function initialiseServer(options) {
 }  
 
 function loadBookMetaData() {
+  forEachBookDirectory(loadBook);
+}
+
+function forEachBookDirectory(callback) {
   var directoryName = 'NOT_INITIALISED';
   var fileObject;
  
-  console.log("loadBookMetaData(): Loading book directories...");
-  fs.readdir(booksDocRoot, function (err, files) {
-    if (err)
-       throw err;
-    for (var index in files) {
-      directoryName = files[index];
-      fileObject = fs.statSync(booksDocRoot + '\\' + directoryName);
-      if (fileObject.isDirectory()) {
-        console.log('Loading: ' + directoryName);
-      } else {
-        console.log('Skipping: ' + directoryName);
-      }
+  console.log('forEachBookDirectory(): Loading book directories from ' + booksDocRoot + ' ...');
+  var files = fs.readdirSync(booksDocRoot);
+  for (var index in files) {
+    directoryName = files[index];
+    fileObject = fs.statSync(booksDocRoot + '\\' + directoryName);
+    if (fileObject.isDirectory()) {
+      console.log('Invoking callback on: ' + directoryName);
+      callback(directoryName);
+    } else {
+      console.log('Skipping: ' + directoryName);
     }
-  });
+  }
 
-  console.log("loadBookMetaData(): Loaded book directories.");
+  console.log("forEachBookDirectory(): Loaded book directories.");
 }
 
 
@@ -49,6 +51,7 @@ function loadBook(bookUri) {
   var chapterSet = loadBookChapterSet(bookUri);
   var bookDescriptor = loadBookDescriptor(bookUri); 
   bookDescriptor.chapterCount = chapterSet.length;
+  bookDescriptor.bookUri = bookUri;
 
   bookLibrary[bookUri] = new Book(bookDescriptor, chapterSet); 
 
@@ -159,6 +162,17 @@ function getBookChapter(bookUri, chapterNumber) {
   return result;
 }
 
+function getAllBookDescriptors() {
+  var result = [];
+  var bookUri = '';
+
+  for (bookUri in bookLibrary) {
+    result.push(bookLibrary[bookUri].descriptor);
+  }
+  return result;
+}
+
+exports.getAllBookDescriptors = getAllBookDescriptors;
 exports.getBookDescriptor = getBookDescriptor;
 exports.getBookChapter = getBookChapter;
 exports.initialiseServer = initialiseServer;

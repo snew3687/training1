@@ -13,8 +13,8 @@ var bookReader = function() {
   var currentBookUri = 'BOOK_URI_NOT_YET_ASSIGNED'; 
 
   var initialise = function initialise() {
-    $("a.bookLink").on('click', handleBookLinkClick);
     initialiseChapterControlHandlers();
+    loadAllBookInformation();
   };
 
   function initialiseChapterControlHandlers() {
@@ -62,6 +62,42 @@ var bookReader = function() {
     // Load first chapter
     $('#chapterToFetch').val(1);
     handleFetchChapter();
+  }
+
+  function loadAllBookInformation() {
+
+    $.ajax({
+      url: "books/all",
+      type: 'GET',
+      success: listAllBookInformation
+    });
+  }
+
+  function listAllBookInformation(allBookDescriptors) {
+    var $list = $('div#bookListContainer > ul');
+    $list.children().remove();
+    $(allBookDescriptors).each(function(index, item) {
+      $list.append($(
+        '<li>' +
+          '<a class="bookLink" href="#" data-bookUri="' + item.bookUri + '">' +
+            '<span class="authorName">' + item.Author + '</span>' +
+            '&#45;' +
+            '<span class="bookTitle">' + item.Title + '</span>' +
+          '</a>' +
+        '</li>' 
+      ));
+    });
+
+    $("a.bookLink").on('click', handleBookLinkClick);
+    /****
+        <li>
+          <a class="bookLink" href="#" data-bookUri="JaneAusten_PrideAndPrejudice">
+            <span class="authorName">Jane Austen</span>
+            &#45;
+            <span class="bookTitle">Pride and Prejudice</span>
+          </a>
+        </li> 
+    ****/
   }
 
   function loadBookInformation() {

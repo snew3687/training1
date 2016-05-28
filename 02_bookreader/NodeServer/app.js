@@ -9,6 +9,17 @@ bookServer.initialiseServer(
 
 app.use(express.static(__dirname + '/public'));
 
+// Get all book descriptors
+app.get('/books/all', function(request, response) {
+  var bookUri = request.params.bookUri;
+  var allBookDescriptors = bookServer.getAllBookDescriptors();
+
+  response.type('json');
+  response
+    .status(200)
+    .send(allBookDescriptors);
+});
+
 // Get book descriptor
 app.get('/books/:bookUri', function(request, response) {
   var bookUri = request.params.bookUri;
