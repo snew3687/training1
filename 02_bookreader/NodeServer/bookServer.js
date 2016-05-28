@@ -11,7 +11,31 @@ function initialiseServer(options) {
   if (options.booksDocRoot) {
     booksDocRoot = options.booksDocRoot;
   }
+  loadBookMetaData();
 }  
+
+function loadBookMetaData() {
+  var directoryName = 'NOT_INITIALISED';
+  var fileObject;
+ 
+  console.log("loadBookMetaData(): Loading book directories...");
+  fs.readdir(booksDocRoot, function (err, files) {
+    if (err)
+       throw err;
+    for (var index in files) {
+      directoryName = files[index];
+      fileObject = fs.statSync(booksDocRoot + '\\' + directoryName);
+      if (fileObject.isDirectory()) {
+        console.log('Loading: ' + directoryName);
+      } else {
+        console.log('Skipping: ' + directoryName);
+      }
+    }
+  });
+
+  console.log("loadBookMetaData(): Loaded book directories.");
+}
+
 
 function Book(descriptor, chapterSet)
 {
